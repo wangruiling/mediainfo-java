@@ -2,7 +2,7 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.github.bluejean</groupId>
+    <groupId>com.github.wangruiling</groupId>
     <artifactId>mediainfo-java</artifactId>
     <version>0.0.1</version>
 
@@ -50,6 +50,23 @@
             <scope>test</scope>
         </dependency>
     </dependencies>
+
+    <!-- 设置部署仓库地址 -->
+    <distributionManagement>
+        <!-- 两个ID必须与 setting.xml中的<server><id>nexus</id></server>保持一致-->
+        <repository>
+            <id>nexus</id>
+            <name>Nexus Release Repository</name>
+            <!--<url>http://192.168.1.10:8081/nexus/content/repositories/releases/</url>-->
+            <url>http://192.168.1.5:8081/nexus/repository/maven-releases/</url>
+        </repository>
+        <snapshotRepository>
+            <id>nexus</id>
+            <name>bluejean Snapshot Repository</name>
+            <!--<url>http://192.168.1.10:8081/nexus/content/repositories/snapshots/</url>-->
+            <url>http://192.168.1.5:8081/nexus/repository/maven-snapshots/</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <build>
         <pluginManagement>
