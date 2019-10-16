@@ -1,5 +1,8 @@
 package com.github.bluejean.mediainfo.util;
 
+import org.javasimon.SimonManager;
+import org.javasimon.Split;
+import org.javasimon.Stopwatch;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 
@@ -16,6 +19,8 @@ import java.util.Date;
 import java.util.Locale;
 
 class MediaInfoTest {
+    Stopwatch stopwatch = SimonManager.getStopwatch("org.javasimon.examples.HelloWorld-stopwatch");
+
     @BeforeAll
     static void initAll() {
         System.setProperty("jna.debug_load", "true");
@@ -45,7 +50,8 @@ class MediaInfoTest {
         System.out.println("开始执行...");
         MediaInfo MI = new MediaInfo();
 
-        String FileName = "D:/tmp/video/4K/bjm05960001.mov";
+        String FileName = "D:/tmp/video/4K/bjm06030026.mov";
+        Split split = stopwatch.start(); // returns split object
         if (MI.open(FileName)>0){
             System.out.println("文件打开成功");
             //获得视频的宽和高
@@ -54,17 +60,39 @@ class MediaInfoTest {
             //帧率(单位：帧/秒)
             String frameRate = MI.get(MediaInfo.StreamKind.Video, 0, "FrameRate");
             //时长(单位：毫秒)：26360
-            String duration = MI.get(MediaInfo.StreamKind.General, 0, "Duration");
+            String duration = MI.get(MediaInfo.StreamKind.General, 0, "Duration", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
             //文件大小(单位：Byte)
-            String fileSize = MI.get(MediaInfo.StreamKind.General, 0, "FileSize");
+            String fileSize = MI.get(MediaInfo.StreamKind.General, 0, "FileSize", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
+            //概要-格式概况
+            String generalFormatProfile = MI.get(MediaInfo.StreamKind.General, 0, "Format_Profile", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
+            //视频-格式概况
+            String videoFormatProfile = MI.get(MediaInfo.StreamKind.Video, 0, "Format_Profile", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
+            //视频-格式
+            String videoFormat = MI.get(MediaInfo.StreamKind.Video, 0, "Format", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
 
-            System.out.println(MI.inform());
+            //母带存储
+            StringBuilder Originally_shot_on = new StringBuilder(generalFormatProfile);
+            Originally_shot_on.append(" ").append("10-bit");
+            Originally_shot_on.append(" ").append(videoFormat);
+            Originally_shot_on.append(" ").append(videoFormatProfile);
+            Originally_shot_on.append(" ").append("4K");
+            Originally_shot_on.append(" ").append(width).append("x").append(height);
+            frameRate = frameRate.subSequence(0, frameRate.indexOf(".")).toString();
+            Originally_shot_on.append(" ").append(frameRate).append("p");
+
+//            System.out.println(MI.inform());
             System.out.println(width + " " + height);
             System.out.println("帧率:" + frameRate);
             System.out.println("时长:" + duration);
             System.out.println("文件大小:" + fileSize);
+            System.out.println("概要-格式概况:" + generalFormatProfile);
+            System.out.println("视频-格式概况:" + videoFormatProfile);
+            System.out.println("视频-格式:" + videoFormat);
+            System.out.println("母带存储:" + Originally_shot_on.toString());
         }
         MI.close();
+        Split stop = split.stop();
+        System.out.println(stop);
         System.out.println("执行成功!");
     }
 
@@ -73,7 +101,7 @@ class MediaInfoTest {
         System.out.println("开始执行...");
         MediaInfo MI = new MediaInfo();
 
-        String FileName = "D:/tmp/video/4K/bjm05960001.mov";
+        String FileName = "D:/tmp/video/4K/bjm06030026.mov";
         if (MI.open(FileName)>0){
             System.out.println("文件打开成功");
 //            String m = MI.get(MediaInfo.StreamKind.General, 0, "OverallBitRate");
