@@ -29,14 +29,14 @@ class MediaInfoTest {
     @Test
     public void simple() {
         System.out.println("开始执行...");
-        com.github.bluejean.mediainfo.util.MediaInfo MI = new com.github.bluejean.mediainfo.util.MediaInfo();
+        MediaInfo MI = new MediaInfo();
 
         String FileName = "D:/tmp/video/4K/bjm05960001.mov";
         if (MI.open(FileName)>0){
             System.out.println("文件打开成功");
             //获得视频的宽和高
-            String width = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Width");
-            String height = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Height");
+            String width = MI.get(MediaInfo.StreamKind.Video, 0, "Width");
+            String height = MI.get(MediaInfo.StreamKind.Video, 0, "Height");
 
             System.out.println(MI.inform());
             System.out.println(width + " " + height);
@@ -48,27 +48,27 @@ class MediaInfoTest {
     @Test
     public void simple2() {
         System.out.println("开始执行...");
-        com.github.bluejean.mediainfo.util.MediaInfo MI = new com.github.bluejean.mediainfo.util.MediaInfo();
+        MediaInfo MI = new MediaInfo();
 
         String FileName = "D:/tmp/video/4K/bjm06030026.mov";
         Split split = stopwatch.start(); // returns split object
         if (MI.open(FileName)>0){
             System.out.println("文件打开成功");
             //获得视频的宽和高
-            String width = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Width");
-            String height = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Height");
+            String width = MI.get(MediaInfo.StreamKind.Video, 0, "Width");
+            String height = MI.get(MediaInfo.StreamKind.Video, 0, "Height");
             //帧率(单位：帧/秒)
-            String frameRate = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "FrameRate");
+            String frameRate = MI.get(MediaInfo.StreamKind.Video, 0, "FrameRate");
             //时长(单位：毫秒)：26360
-            String duration = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, "Duration", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+            String duration = MI.get(MediaInfo.StreamKind.General, 0, "Duration", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
             //文件大小(单位：Byte)
-            String fileSize = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, "FileSize", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+            String fileSize = MI.get(MediaInfo.StreamKind.General, 0, "FileSize", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
             //概要-格式概况
-            String generalFormatProfile = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, "Format_Profile", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+            String generalFormatProfile = MI.get(MediaInfo.StreamKind.General, 0, "Format_Profile", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
             //视频-格式概况
-            String videoFormatProfile = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Format_Profile", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+            String videoFormatProfile = MI.get(MediaInfo.StreamKind.Video, 0, "Format_Profile", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
             //视频-格式
-            String videoFormat = MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Format", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+            String videoFormat = MI.get(MediaInfo.StreamKind.Video, 0, "Format", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
 
             //母带存储
             StringBuilder Originally_shot_on = new StringBuilder(generalFormatProfile);
@@ -99,7 +99,7 @@ class MediaInfoTest {
     @Test
     public void info() {
         System.out.println("开始执行...");
-        com.github.bluejean.mediainfo.util.MediaInfo MI = new com.github.bluejean.mediainfo.util.MediaInfo();
+        MediaInfo MI = new MediaInfo();
 
         String FileName = "D:/tmp/video/4K/bjm06030026.mov";
         if (MI.open(FileName)>0){
@@ -135,20 +135,20 @@ class MediaInfoTest {
 
         //Info about the library
 
-        To_Display += com.github.bluejean.mediainfo.util.MediaInfo.optionStatic("Info_Version");
+        To_Display += MediaInfo.optionStatic("Info_Version");
 
         To_Display += "\r\n\r\nInfo_Parameters\r\n";
-        To_Display += com.github.bluejean.mediainfo.util.MediaInfo.optionStatic("Info_Parameters");
+        To_Display += MediaInfo.optionStatic("Info_Parameters");
 
         To_Display += "\r\n\r\nInfo_Capacities\r\n";
-        To_Display += com.github.bluejean.mediainfo.util.MediaInfo.optionStatic("Info_Capacities");
+        To_Display += MediaInfo.optionStatic("Info_Capacities");
 
         To_Display += "\r\n\r\nInfo_Codecs\r\n";
-        To_Display += com.github.bluejean.mediainfo.util.MediaInfo.optionStatic("Info_Codecs");
+        To_Display += MediaInfo.optionStatic("Info_Codecs");
 
         //An example of how to use the library
 
-        com.github.bluejean.mediainfo.util.MediaInfo MI = new com.github.bluejean.mediainfo.util.MediaInfo();
+        MediaInfo MI = new MediaInfo();
 
         To_Display += "\r\n\r\nOpen\r\n";
         if (MI.open(FileName) > 0)
@@ -169,19 +169,19 @@ class MediaInfoTest {
         To_Display += MI.inform();
 
         To_Display += "\r\n\r\nGetI with Stream=General and Parameter=2\r\n";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, 2, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text);
+        To_Display += MI.get(MediaInfo.StreamKind.General, 0, 2, MediaInfo.InfoKind.Text);
 
         To_Display += "\r\n\r\ncountGet with StreamKind=Stream_Audio\r\n";
-        To_Display += MI.countGet(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Audio, -1);
+        To_Display += MI.countGet(MediaInfo.StreamKind.Audio, -1);
 
         To_Display += "\r\n\r\nget with Stream=General and Parameter=\"AudioCount\"\r\n";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, "AudioCount", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+        To_Display += MI.get(MediaInfo.StreamKind.General, 0, "AudioCount", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
 
         To_Display += "\r\n\r\nget with Stream=Audio and Parameter=\"StreamCount\"\r\n";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Audio, 0, "StreamCount", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+        To_Display += MI.get(MediaInfo.StreamKind.Audio, 0, "StreamCount", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
 
         To_Display += "\r\n\r\nget with Stream=General and Parameter=\"FileSize\"\r\n";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, "FileSize", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+        To_Display += MI.get(MediaInfo.StreamKind.General, 0, "FileSize", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
 
         To_Display += "\r\n\r\nClose\r\n";
         MI.close();
@@ -193,7 +193,7 @@ class MediaInfoTest {
         FileName = FileName.replace(" ", "%20");
 
         //Initializing MediaInfo
-        com.github.bluejean.mediainfo.util.MediaInfo MI = new com.github.bluejean.mediainfo.util.MediaInfo();
+        MediaInfo MI = new MediaInfo();
 
         //From: preparing an example file for reading
         RandomAccessFile From = new RandomAccessFile(FileName, "r"); //From file
@@ -230,10 +230,10 @@ class MediaInfoTest {
         //get() example
         String To_Display = new String();
         To_Display += "get with Stream=General and Parameter=\"Format\": ";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, "Format", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+        To_Display += MI.get(MediaInfo.StreamKind.General, 0, "Format", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
         To_Display += "\r\n";
         To_Display += "get with Stream=Video and Parameter=\"Format_Settings_GOP\": ";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Format_Settings_GOP", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+        To_Display += MI.get(MediaInfo.StreamKind.Video, 0, "Format_Settings_GOP", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
         System.out.println(To_Display);
     }
 
@@ -279,7 +279,7 @@ class MediaInfoTest {
         int From_Buffer_Size; //The size of the read file buffer
 
         //Initializing MediaInfo
-        com.github.bluejean.mediainfo.util.MediaInfo MI = new com.github.bluejean.mediainfo.util.MediaInfo();
+        MediaInfo MI = new MediaInfo();
 
         //Preparing to fill MediaInfo with a buffer
         MI.openBufferInit(From_Length, 0);
@@ -324,10 +324,10 @@ class MediaInfoTest {
         //get() example
         String To_Display = new String();
         To_Display += "get with Stream=General and Parameter=\"Format\": ";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.General, 0, "Format", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+        To_Display += MI.get(MediaInfo.StreamKind.General, 0, "Format", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
         To_Display += "\r\n";
         To_Display += "get with Stream=Video and Parameter=\"Format_Settings_GOP\": ";
-        To_Display += MI.get(com.github.bluejean.mediainfo.util.MediaInfo.StreamKind.Video, 0, "Format_Settings_GOP", com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Text, com.github.bluejean.mediainfo.util.MediaInfo.InfoKind.Name);
+        To_Display += MI.get(MediaInfo.StreamKind.Video, 0, "Format_Settings_GOP", MediaInfo.InfoKind.Text, MediaInfo.InfoKind.Name);
         System.out.println(To_Display);
     }
 

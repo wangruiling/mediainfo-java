@@ -1,4 +1,4 @@
-package com.github.bluejean.mediainfo.util;
+package com.github.wangruiling.mediainfo.util;
 /*  Copyright (c) MediaArea.net SARL. All Rights Reserved.
  *
  *  Use of this source code is governed by a BSD-style license that can
